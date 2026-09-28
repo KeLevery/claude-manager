@@ -1,0 +1,40 @@
+[package]
+name = "claude-manager"
+version = "0.1.0"
+description = "A Tauri App"
+authors = ["you"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+# The `_lib` suffix may seem redundant but it is necessary
+# to make the lib name unique and won't conflict with the bin name.
+# This is only an issue on Windows, see https://github.com/rust-lang/cargo/issues/8519
+name = "claude_manager_lib"
+# 桌面 Windows 端只用 bin，lib 仅作 rlib 依赖；cdylib 会导出全部符号，
+# 触发 PE 的 65535 导出上限（Tauri 依赖树过大），故排除。
+# staticlib 同样不需要（曾因此每次构建多产出 ~760MB 的 .lib），一并排除。
+# 移动端需要 cdylib 作为入口，若将来支持移动端需在此 target 重新加入。
+crate-type = ["rlib"]
+
+# 调试信息降为行号表：保留崩溃时的行号定位，砍掉完整类型信息，
+# 依赖产物体积可缩小约一半以上（对日常开发无感知影响）。
+[profile.dev]
+debug = 1
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2.7"
+tauri-plugin-opener = "2"
+anyhow = "1"
+portable-pty = "0.9"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+uuid = { version = "1.24", features = ["v4", "serde"] }
+dirs = "6"
+log = "0.4"
+

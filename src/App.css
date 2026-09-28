@@ -1,0 +1,75 @@
+/* 全局重置 + 暗色主题基础。
+   覆盖 Tauri 模板默认的浅色背景与字体。 */
+
+:root {
+  font-family: "Segoe UI", "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #e6e6e6;
+  background-color: #0c0c0c;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background-color: #0c0c0c;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  outline: none;
+}
+
+button:focus-visible {
+  outline: 2px solid #4a8af0;
+  outline-offset: 1px;
+}
+
+input {
+  font-family: inherit;
+  outline: none;
+}
+
+input:focus-visible {
+  border-color: #4a8af0 !important;
+}
+
+/* 滚动条样式（暗色） */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+/* xterm 容器填满父级 */
+.xterm,
+.xterm-screen {
+  width: 100% !important;
+  height: 100% !important;
+}
+.xterm-viewport {
+  background-color: transparent !important;
+}
